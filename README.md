@@ -1,4 +1,4 @@
-# Create New App
+# Create App
 
 Create projects with templates.
 
@@ -6,22 +6,22 @@ Create projects with templates.
 
 ```bash
 # Interactive mode
-npx create-new-app
+npx create-app
 
 # Override template
-npx create-new-app --template <template>
+npx create-app --template <template>
 
 # Override name
-npx create-new-app --name <name>
+npx create-app --name <name>
 
 # Get Command help
-npx create-new-app --help
+npx create-app --help
 ```
 
 ## Installation
 
 ```bash
-npm install -g create-new-app
+npm install -g create-app
 ```
 
 ## Questions?
