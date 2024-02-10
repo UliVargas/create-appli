@@ -1,0 +1,33 @@
+{
+  "name": "create-uliapp",
+  "version": "0.1.0",
+  "description": "Create projects",
+  "main": "index.mjs",
+  "bin": {
+    "create-uliapp": "dist/index.js"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "Ulises Vargas",
+  "license": "ISC",
+  "dependencies": {
+    "glob": "^10.3.5",
+    "picocolors": "^1.0.0",
+    "prompts": "^2.4.2",
+    "yargs": "^17.7.2"
+  },
+  "scripts": {
+    "build": "tsup",
+    "start": "node dist/index.js",
+    "dev": "tsup --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/prompts": "^2.4.9",
+    "@types/yargs": "^17.0.32",
+    "prettier": "^3.0.3",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  }
+}
