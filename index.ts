@@ -161,8 +161,8 @@ async function main() {
   console.log("\n✨ Project created ✨");
   console.log(`\n${color.yellow(`Next steps:`)}\n`);
   console.log(`${color.green(`cd`)} ${project.name}`);
-  console.log(`${color.green(`pnpm`)} install`);
-  console.log(`${color.green(`pnpm`)} dev`);
+  console.log(`${color.green(`npm`)} install`);
+  console.log(`${color.green(`npm`)} dev`);
 
   // Extras log
   if (extras.length) {
