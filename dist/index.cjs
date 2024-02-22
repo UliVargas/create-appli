@@ -27,14 +27,14 @@ var getImportMetaUrl = () => typeof document === "undefined" ? new URL("file:" +
 var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
 
 // index.ts
-var import_node_path = __toESM(require("path"));
+var import_node_path = __toESM(require("path"), 1);
 var import_node_url = require("url");
 var import_promises = require("fs/promises");
 var import_glob = require("glob");
-var import_picocolors = __toESM(require("picocolors"));
-var import_prompts = __toESM(require("prompts"));
-var import_yargs = __toESM(require("yargs"));
-var import_execa = require("execa");
+var import_picocolors = __toESM(require("picocolors"), 1);
+var import_prompts = __toESM(require("prompts"), 1);
+var import_yargs = __toESM(require("yargs"), 1);
+var import_execa = __toESM(require("execa"));
 var import_helpers = require("yargs/helpers");
 var TEMPLATES = [
   {
@@ -200,4 +200,4 @@ Check out the ${import_picocolors.default.italic("README.md")} file inside ${imp
   console.log(`Preguntas \u{1F440}? ${import_picocolors.default.underline(import_picocolors.default.cyan("https://www.linkedin.com/in/ulisesvaf/"))}`);
 }
 main().catch(console.error);
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=index.cjs.map
