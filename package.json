@@ -1,6 +1,6 @@
 {
   "name": "create-appli",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Create projects with templates",
   "main": "index.mjs",
   "type": "module",
