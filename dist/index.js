@@ -34,7 +34,7 @@ var import_glob = require("glob");
 var import_picocolors = __toESM(require("picocolors"));
 var import_prompts = __toESM(require("prompts"));
 var import_yargs = __toESM(require("yargs"));
-var import_execa = __toESM(require("execa"));
+var import_execa = require("execa");
 var import_helpers = require("yargs/helpers");
 var TEMPLATES = [
   {

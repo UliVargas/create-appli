@@ -1,8 +1,8 @@
 {
   "name": "create-appli",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Create projects with templates",
-  "main": "index.mjs",
+  "main": "index.js",
   "bin": {
     "create-appli": "dist/index.js"
   },
