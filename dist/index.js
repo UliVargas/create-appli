@@ -34,6 +34,7 @@ var import_glob = require("glob");
 var import_picocolors = __toESM(require("picocolors"));
 var import_prompts = __toESM(require("prompts"));
 var import_yargs = __toESM(require("yargs"));
+var import_execa = require("execa");
 var import_helpers = require("yargs/helpers");
 var TEMPLATES = [
   {
@@ -89,6 +90,12 @@ var args = (0, import_yargs.default)((0, import_helpers.hideBin)(process.argv)).
     alias: "t",
     type: "string",
     description: "Template to use"
+  },
+  packageManager: {
+    alias: "pm",
+    type: "string",
+    choices: ["npm", "yarn", "pnpm"],
+    description: "Package manager to use for installing dependencies"
   }
 });
 import_prompts.default.override(args.argv);
@@ -115,6 +122,16 @@ async function main() {
         message: `Which template would you like to use?`,
         initial: initialProject || 0,
         choices: TEMPLATES
+      },
+      {
+        type: "select",
+        name: "packageManager",
+        message: "Choose your package manager",
+        choices: [
+          { value: "npm", title: "npm" },
+          { value: "pnpm", title: "pnpm" },
+          { value: "yarn", title: "yarn" }
+        ]
       }
     ],
     {
@@ -145,6 +162,19 @@ async function main() {
       await (0, import_promises.cp)(import_node_path.default.join(template, "extras", extra), destination, { recursive: true });
     }
   }
+  async function installDependencies(destination2, packageManager) {
+    process.chdir(destination2);
+    console.log(`
+Installing dependencies using ${packageManager}...
+`);
+    try {
+      const { stdout } = await (0, import_execa.execa)(packageManager, ["install"]);
+      console.log(stdout);
+    } catch (error) {
+      console.error("Error durante la instalaci\xF3n:", error);
+    }
+  }
+  await installDependencies(destination, project.packageManager);
   const files = await (0, import_glob.glob)(`**/*`, { nodir: true, cwd: destination, absolute: true });
   for await (const file of files) {
     const data = await (0, import_promises.readFile)(file, "utf8");
@@ -156,8 +186,8 @@ async function main() {
 ${import_picocolors.default.yellow(`Next steps:`)}
 `);
   console.log(`${import_picocolors.default.green(`cd`)} ${project.name}`);
-  console.log(`${import_picocolors.default.green(`pnpm`)} install`);
-  console.log(`${import_picocolors.default.green(`pnpm`)} dev`);
+  console.log(`${import_picocolors.default.green(`npm`)} install`);
+  console.log(`${import_picocolors.default.green(`npm`)} dev`);
   if (extras.length) {
     console.log(
       `

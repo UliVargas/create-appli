@@ -12,6 +12,7 @@
   "author": "Ulises Vargas",
   "license": "ISC",
   "dependencies": {
+    "execa": "^8.0.1",
     "glob": "^10.3.5",
     "picocolors": "^1.0.0",
     "prompts": "^2.4.2",

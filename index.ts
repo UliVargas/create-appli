@@ -7,6 +7,7 @@ import { glob } from "glob";
 import color from "picocolors";
 import prompts from "prompts";
 import yargs from "yargs";
+import { execa } from "execa";
 import { hideBin } from "yargs/helpers";
 
 // List of templates
@@ -69,6 +70,12 @@ const args = yargs(hideBin(process.argv)).options({
     type: "string",
     description: "Template to use",
   },
+  packageManager: {
+    alias: "pm",
+    type: "string",
+    choices: ["npm", "yarn", "pnpm"],
+    description: "Package manager to use for installing dependencies",
+  },
 });
 
 // Orverride arguments passed on the CLI
@@ -102,6 +109,16 @@ async function main() {
         initial: initialProject || 0,
         choices: TEMPLATES,
       },
+      {
+        type: 'select',
+        name: 'packageManager',
+        message: 'Choose your package manager',
+        choices: [
+          { value: 'npm', title: 'npm' },
+          { value: 'pnpm', title: 'pnpm' },
+          { value: 'yarn', title: 'yarn' },
+        ]
+      }
     ],
     {
       onCancel: () => {
@@ -145,6 +162,24 @@ async function main() {
       await cp(path.join(template, "extras", extra), destination, { recursive: true });
     }
   }
+
+  async function installDependencies(destination, packageManager) {
+    // Change to the project directory
+    process.chdir(destination);
+
+    // Run the specified package manager install command
+    console.log(`\nInstalling dependencies using ${packageManager}...\n`);
+    try {
+      const { stdout } = await execa(packageManager, ['install']);
+      console.log(stdout);
+    } catch (error) {
+      console.error("Error durante la instalación:", error);
+    }
+  }
+
+  // Install dependencies
+  await installDependencies(destination, project.packageManager);
+
 
   // Get all files from the destination folder
   const files = await glob(`**/*`, { nodir: true, cwd: destination, absolute: true });
